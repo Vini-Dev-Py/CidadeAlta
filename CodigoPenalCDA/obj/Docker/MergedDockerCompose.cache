@@ -1,0 +1,39 @@
+networks:
+  codigopenalcda-networks:
+    driver: bridge
+services:
+  codigopenalcda:
+    build:
+      context: C:\ProgramaþÒo\NewGitHub\CDA\CidadeAlta\CodigoPenalCDA
+      dockerfile: CodigoPenalCDA/Dockerfile
+    depends_on:
+      db:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      TZ: America/Sao_Paulo
+    image: codigopenalcda
+    networks:
+      codigopenalcda-networks: null
+    ports:
+    - published: 44300
+      target: 80
+  db:
+    build:
+      context: C:\ProgramaþÒo\NewGitHub\CDA\CidadeAlta\CodigoPenalCDA
+      dockerfile: db/Dockerfile
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_DATABASE: codigopenalcda
+      MYSQL_PASSWORD: docker
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: docker
+      TZ: America/Sao_Paulo
+    image: codigopenalcda-db
+    networks:
+      codigopenalcda-networks: null
+    ports:
+    - published: 3308
+      target: 3306
+    restart: always
+version: '3.4'
