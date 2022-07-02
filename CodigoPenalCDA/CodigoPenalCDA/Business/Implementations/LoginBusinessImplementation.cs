@@ -10,6 +10,7 @@ using System.Security.Claims;
 using CodigoPenalCDA.Model;
 using System.Text;
 using System.Security.Cryptography;
+using System.Linq;
 
 namespace CodigoPenalCDA.Business.Implementations
 {
@@ -38,7 +39,8 @@ namespace CodigoPenalCDA.Business.Implementations
             var claims = new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
-                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
+                new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName),
+                new Claim("iduser", user.Id.ToString()),
             };
 
             var accessToken = _tokenService.GenerateAccessToken(claims);
@@ -51,6 +53,8 @@ namespace CodigoPenalCDA.Business.Implementations
 
             DateTime createDate = DateTime.Now;
             DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
+
+            Console.WriteLine(accessToken);
 
             return new TokenVO(
                 true,
@@ -69,6 +73,10 @@ namespace CodigoPenalCDA.Business.Implementations
             var principal = _tokenService.GetPrincipalFromExpiredToken(accessToken);
 
             var username = principal.Identity.Name;
+
+            var claim = principal.Claims.Where(x => x.Type == "iduser").FirstOrDefault();
+
+            Console.WriteLine(claim.Value);
 
             var user = _repository.ValidateCredentials(username);
 
