@@ -1,1 +1,1 @@
-for i in `find /home/database/ -name "*.sql" | sort --version-sort`; do mysql -udocker -pdocker CodigoPenalCDA < $i; done;
+for i in `find /home/database/ -name "*.sql" | sort --version-sort`; do mysql -udocker -pdocker codigopenalcda < $i; done;
