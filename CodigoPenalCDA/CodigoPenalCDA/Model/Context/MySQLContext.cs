@@ -9,6 +9,6 @@ namespace CodigoPenalCDA.Model.Context
         public MySQLContext(DbContextOptions<MySQLContext> options) : base(options) {}
 
         public DbSet<User> Users { get; set; }
-
+        public DbSet<CriminalCode> CriminalCodes { get; set; }
     }
 }

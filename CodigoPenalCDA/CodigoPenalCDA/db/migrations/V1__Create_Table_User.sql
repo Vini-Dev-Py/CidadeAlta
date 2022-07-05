@@ -7,3 +7,17 @@ CREATE TABLE `codigopenalcda`.`user` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC));
+
+CREATE TABLE `codigopenalcda`.`criminalcode` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(150) NOT NULL,
+  `description` LONGTEXT NOT NULL,
+  `penalty` DECIMAL(7,2) NOT NULL,
+  `prisontime` INT NOT NULL,
+  `statusid` INT NOT NULL,
+  `createdate` DATETIME NOT NULL,
+  `updatedate` DATETIME NULL,
+  `createuserid` INT NOT NULL,
+  `updateuserid` INT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));

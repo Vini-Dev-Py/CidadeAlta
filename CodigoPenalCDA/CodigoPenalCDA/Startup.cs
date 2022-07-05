@@ -115,6 +115,7 @@ namespace CodigoPenalCDA
 
             //Dependency Injection
             services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
+            services.AddScoped<ICriminalCodeBusiness, CriminalCodeBusinessImplementations>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
