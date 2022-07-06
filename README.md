@@ -71,9 +71,16 @@ docker-compose up -d --build
 
 - <a href="https://insomnia.rest/download">Insomnia</a>
     - O template com as chamas utilizadas no Insomnia estão <a href="https://github.com/Vini-Dev-Py/CidadeAlta/tree/main/CodigoPenalCDA/Insomnia">aqui</a>
+    - Caso você nunca tenha importado um template insomnia, o próximo tópico irá ensinar
 - <a href="https://www.mysql.com/products/workbench/">MySQL Workbench</a>
 - <a href="http://localhost:44300/swagger/index.html">Swagger do projeto</a>
     - Lembrando o Swagger so vai funcionar assim que o projeto estiver rodando !
+
+### Importando um template insomnia
+
+
+https://user-images.githubusercontent.com/62727555/177458020-f50c092c-231f-4ca3-baeb-cca06722f3ff.mp4
+
 
 ### Como fazer a conexão entre o meu container docker com o MySQL Workbench ?
 
