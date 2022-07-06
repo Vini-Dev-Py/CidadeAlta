@@ -76,6 +76,9 @@ docker-compose up -d --build
 
 ![Conexão](https://user-images.githubusercontent.com/62727555/177453104-6887c268-2947-4caa-917d-fa12da75ab8f.png)
 
+- Usuário: root 
+- Senha: root
+
 <p>A conexão entre o banco de dados e o MySQL Workbench deve ser feita dessa forma</p>
 
 ### Como essas imagens são ?
@@ -88,9 +91,13 @@ docker-compose up -d --build
 
 ![docker mysql](https://user-images.githubusercontent.com/62727555/177453953-a77d5c68-976e-45cf-90a2-6b197f35c517.png)
 
+>Nesse Dockerfile primeiro definimos que usaremos a versão 5.7.22 do MySQL, depois expomos a porta 3306 do container, após isso fazemos as copias dos arquivos SQL para nossos volumes e executamos nosso arquivo shell para estarmos contruindo nosso database.
+
 - Docker-Compose
 
 ![docker-compose](https://user-images.githubusercontent.com/62727555/177453982-3236d7ea-ad5b-496d-9e99-f83d85356436.png)
+
+>O docker-compose é um pouco maior que os outros arquivos docker, mas é porque ele organiza os Dockerfiles, esss docker-compose ele cria dois serviços, um para nosso banco de dados e outro para nossa Rest API, configurando as senhas, usuário, database que utilizaremos na aplicação e qual seu Dockerfile responsavel por montar a imagem
 
 ### Como o banco de dados é montado ?
 
