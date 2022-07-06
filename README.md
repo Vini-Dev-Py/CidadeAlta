@@ -77,3 +77,12 @@ docker-compose up -d --build
 ![Conexão](https://user-images.githubusercontent.com/62727555/177453104-6887c268-2947-4caa-917d-fa12da75ab8f.png)
 
 <p>A conexão entre o banco de dados e o MySQL Workbench deve ser feita dessa forma</p>
+
+
+### Como essas imagens são ?
+
+- Dockerfile dotnet
+
+- Dockerfile MySQL
+
+- Docker-Compose
