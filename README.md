@@ -29,8 +29,8 @@ e o mais simples de lidar com a mesma, para que todos consigam utilizar da melho
 
 - `Funcionalidade 1`: Criação de usuários.
 - `Funcionalidade 2`: Autenticação de usuários.
-- `Funcionalidade 2a`: CRUD de código penal, Criar, Ler, atualizar e deletar códigos penais.
-- `Funcionalidade 3`: CRUD de Status, Criar, Ler, atualizar e deletar Status.
+- `Funcionalidade 3`: CRUD de código penal, Criar, Ler, atualizar e deletar códigos penais.
+- `Funcionalidade 4`: CRUD de Status, Criar, Ler, atualizar e deletar Status.
 
 ## :computer: Build
 
