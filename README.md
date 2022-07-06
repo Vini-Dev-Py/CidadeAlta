@@ -71,6 +71,8 @@ docker-compose up -d --build
 
 - <a href="https://insomnia.rest/download">Insomnia</a>
 - <a href="https://www.mysql.com/products/workbench/">MySQL Workbench</a>
+- <a href="http://localhost:44300/swagger/index.html">Swagger do projeto</a>
+    - Lembrando o Swagger so vai funcionar assim que o projeto estiver rodando !
 
 ### Como fazer a conexão entre o meu container docker com o MySQL Workbench ?
 
