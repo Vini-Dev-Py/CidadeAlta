@@ -14,21 +14,32 @@ namespace CodigoPenalCDA.Business.Implementations
     {
         private readonly IRepository<CriminalCode> _repository;
 
+        private readonly IRepository<Status> _repositoryStatus;
+
         private readonly CriminalCodeConverter _converter;
 
         private readonly ITokenService _tokenService;
 
-        public CriminalCodeBusinessImplementations(IRepository<CriminalCode> repository)
+        public CriminalCodeBusinessImplementations(IRepository<CriminalCode> repository, IRepository<Status> repositoryStatus)
         {
             _repository = repository;
+            _repositoryStatus = repositoryStatus;
             _converter = new CriminalCodeConverter();
         }
 
         public CriminalCodeVO Create(CriminalCodeVO criminalCode, string token)
         {
             var criminalEntity = _converter.Parse(criminalCode);
+
+            Random randomNumber = new Random();
+
+            var statusEntity = new Status()
+            {
+                Id = randomNumber.Next(10000),
+                Name = criminalEntity.Name
+            };
             
-            criminalEntity.StatusId = 1;
+            criminalEntity.StatusId = statusEntity.Id;
             criminalEntity.CreateDate = DateTime.Now;
 
             var handler = new JwtSecurityTokenHandler();
@@ -40,8 +51,30 @@ namespace CodigoPenalCDA.Business.Implementations
             var claim = principal.Claims.Where(x => x.Type == "iduser").FirstOrDefault();
 
             criminalEntity.CreateUserId = int.Parse(claim.Value);
-
+            
+            statusEntity = _repositoryStatus.Create(statusEntity);
+            
             criminalEntity = _repository.Create(criminalEntity);
+            return _converter.Parse(criminalEntity);
+        }
+
+        public CriminalCodeVO Update(CriminalCodeVO criminalCode, string token)
+        {
+            var criminalEntity = _converter.Parse(criminalCode);
+
+            criminalEntity.UpdateDate = DateTime.Now;
+
+            var handler = new JwtSecurityTokenHandler();
+
+            var jsonToken = handler.ReadToken(token);
+
+            var principal = jsonToken as JwtSecurityToken;
+
+            var claim = principal.Claims.Where(x => x.Type == "iduser").FirstOrDefault();
+
+            criminalEntity.UpdateUserId = int.Parse(claim.Value);
+
+            criminalEntity = _repository.Update(criminalEntity);
             return _converter.Parse(criminalEntity);
         }
 
@@ -58,13 +91,6 @@ namespace CodigoPenalCDA.Business.Implementations
         public CriminalCodeVO FindByID(long id)
         {
             return _converter.Parse(_repository.FindByID(id));
-        }
-
-        public CriminalCodeVO Update(CriminalCodeVO criminalCode)
-        {
-            var criminalEntity = _converter.Parse(criminalCode);
-            criminalEntity = _repository.Update(criminalEntity);
-            return _converter.Parse(criminalEntity);
         }
     }
 }

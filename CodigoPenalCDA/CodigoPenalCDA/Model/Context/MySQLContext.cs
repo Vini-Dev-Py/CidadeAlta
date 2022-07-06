@@ -10,5 +10,6 @@ namespace CodigoPenalCDA.Model.Context
 
         public DbSet<User> Users { get; set; }
         public DbSet<CriminalCode> CriminalCodes { get; set; }
+        public DbSet<Status> StatusCriminals { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace CodigoPenalCDA.Model
         [Column("prisontime")]
         public int PrisonTime { get; set; }
         [Column("statusid")]
-        public int StatusId { get; set; }
+        public long StatusId { get; set; }
         [Column("createdate")]
         public DateTime CreateDate { get; set; }
         [Column("updatedate")]

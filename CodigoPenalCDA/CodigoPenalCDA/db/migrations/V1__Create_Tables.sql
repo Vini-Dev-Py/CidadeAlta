@@ -21,3 +21,8 @@ CREATE TABLE `codigopenalcda`.`criminalcode` (
   `updateuserid` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+
+CREATE TABLE `codigopenalcda`.`status` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(150) NOT NULL,
+  PRIMARY KEY (`id`));

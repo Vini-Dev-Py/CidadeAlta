@@ -17,9 +17,9 @@ namespace CodigoPenalCDA.Controllers
     {
         private ICriminalCodeBusiness _criminalCodeBusiness;
 
-        public CriminalCodeController(ICriminalCodeBusiness productBusiness)
+        public CriminalCodeController(ICriminalCodeBusiness criminalCodeBusiness)
         {
-            _criminalCodeBusiness = productBusiness;
+            _criminalCodeBusiness = criminalCodeBusiness;
         }
 
         [HttpGet]
@@ -31,10 +31,10 @@ namespace CodigoPenalCDA.Controllers
         [HttpGet("{id}")]
         public IActionResult GetCriminalCode(long id) 
         {
-            var store = _criminalCodeBusiness.FindByID(id);
-            if (store == null) return NotFound();
+            var criminalCode = _criminalCodeBusiness.FindByID(id);
+            if (criminalCode == null) return NotFound();
 
-            return Ok(store);
+            return Ok(criminalCode);
         }
 
         [HttpPost]
@@ -45,10 +45,10 @@ namespace CodigoPenalCDA.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCriminalCode([FromBody] CriminalCodeVO CriminalCode)
+        public IActionResult UpdateCriminalCode([FromBody] CriminalCodeVO CriminalCode, [FromQuery] string token)
         {
             if (CriminalCode == null) return BadRequest();
-            return Ok(_criminalCodeBusiness.Update(CriminalCode));
+            return Ok(_criminalCodeBusiness.Update(CriminalCode, token));
         }
 
         [HttpDelete("{id}")]

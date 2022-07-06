@@ -8,7 +8,7 @@ namespace CodigoPenalCDA.Business
         CriminalCodeVO Create(CriminalCodeVO criminalCode, string token);
         CriminalCodeVO FindByID(long id);
         List<CriminalCodeVO> FindAll();
-        CriminalCodeVO Update(CriminalCodeVO criminalCode);
+        CriminalCodeVO Update(CriminalCodeVO criminalCode, string token);
         void Delete(long id);
     }
 }
