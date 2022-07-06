@@ -70,6 +70,7 @@ docker-compose up -d --build
 ### Ferramenta usada para os testes
 
 - <a href="https://insomnia.rest/download">Insomnia</a>
+    - O template com as chamas utilizadas no Insomnia estão <a href="https://github.com/Vini-Dev-Py/CidadeAlta/tree/main/CodigoPenalCDA/Insomnia">aqui</a>
 - <a href="https://www.mysql.com/products/workbench/">MySQL Workbench</a>
 - <a href="http://localhost:44300/swagger/index.html">Swagger do projeto</a>
     - Lembrando o Swagger so vai funcionar assim que o projeto estiver rodando !
