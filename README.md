@@ -94,4 +94,4 @@ docker-compose up -d --build
 
 ### Como o banco de dados é montado ?
 
-<p>Dentro do nosso projeto temos duas pastas chamadas db, uma delas é aonde guardamos o Dockerfile responsável pela imagem Mysql, que fica logo na raiz do projeto, já os arquivos SQL que determinam como nossa tabela será montada ficam na segunda pasta db que se localiza juntamente com os arquivos que compõem nossa Rest API e através desse arquivo e do arquivo shell dentro da pasta ci do projeto nosso banco é montado, pois nosso arquivo shell le e executa os comandos sql que estão dentro do arquvio</p>
+>Dentro do nosso projeto temos duas pastas chamadas db, uma delas é aonde guardamos o Dockerfile responsável pela imagem Mysql, que fica logo na raiz do projeto, já os arquivos SQL que determinam como nossa tabela será montada ficam na segunda pasta db que se localiza juntamente com os arquivos que compõem nossa Rest API e através desse arquivo e do arquivo shell dentro da pasta ci do projeto nosso banco é montado, pois nosso arquivo shell le e executa os comandos sql que estão dentro do arquvio
