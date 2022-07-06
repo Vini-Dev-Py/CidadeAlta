@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CodigoPenalCDA.Hypermedia.Filters;
 
 namespace CodigoPenalCDA.Controllers
 {
@@ -23,12 +24,14 @@ namespace CodigoPenalCDA.Controllers
         }
 
         [HttpGet]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult GetCriminalCodes() 
         {
             return Ok(_criminalCodeBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult GetCriminalCode(long id) 
         {
             var criminalCode = _criminalCodeBusiness.FindByID(id);
@@ -38,6 +41,7 @@ namespace CodigoPenalCDA.Controllers
         }
 
         [HttpPost]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult CreateCriminalCode([FromBody] CriminalCodeVO CriminalCode, [FromQuery] string token)
         {
             if (CriminalCode == null) return BadRequest();
@@ -45,6 +49,7 @@ namespace CodigoPenalCDA.Controllers
         }
 
         [HttpPut("{id}")]
+        [TypeFilter(typeof(HyperMediaFilter))]
         public IActionResult UpdateCriminalCode([FromBody] CriminalCodeVO CriminalCode, [FromQuery] string token)
         {
             if (CriminalCode == null) return BadRequest();

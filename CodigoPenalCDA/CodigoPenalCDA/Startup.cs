@@ -22,6 +22,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Rewrite;
+using CodigoPenalCDA.Hypermedia.Filters;
+using CodigoPenalCDA.Hypermedia.Enricher;
 
 namespace CodigoPenalCDA
 {
@@ -94,6 +96,11 @@ namespace CodigoPenalCDA
             // {
             //     MigrateDatabase(connection);
             // }
+
+            var filterOptions = new HyperMediaFilterOptions();
+            filterOptions.ContentResponseEnricherList.Add(new CriminalCodeEnricher());
+
+            services.AddSingleton(filterOptions);
 
             //Versioning API
             services.AddApiVersioning();
