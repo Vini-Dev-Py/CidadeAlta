@@ -79,7 +79,9 @@ docker-compose up -d --build
 ### Importando um template insomnia
 
 
-https://user-images.githubusercontent.com/62727555/177458020-f50c092c-231f-4ca3-baeb-cca06722f3ff.mp4
+https://user-images.githubusercontent.com/62727555/177458910-45634140-3897-4318-b9f5-02b20bca4f3d.mp4
+
+- Create -> File -> Selecionar arquivo na janela que foi aberta
 
 
 ### Como fazer a conexão entre o meu container docker com o MySQL Workbench ?
