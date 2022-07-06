@@ -78,11 +78,20 @@ docker-compose up -d --build
 
 <p>A conexão entre o banco de dados e o MySQL Workbench deve ser feita dessa forma</p>
 
-
 ### Como essas imagens são ?
 
 - Dockerfile dotnet
 
+![docker dotnet](https://user-images.githubusercontent.com/62727555/177453911-027bcfaf-01ae-4b52-a965-bc0b8baa5564.png)
+
 - Dockerfile MySQL
 
+![docker mysql](https://user-images.githubusercontent.com/62727555/177453953-a77d5c68-976e-45cf-90a2-6b197f35c517.png)
+
 - Docker-Compose
+
+![docker-compose](https://user-images.githubusercontent.com/62727555/177453982-3236d7ea-ad5b-496d-9e99-f83d85356436.png)
+
+### Como o banco de dados é montado ?
+
+<p>Dentro do nosso projeto temos duas pastas chamadas db, uma delas é aonde guardamos o Dockerfile responsável pela imagem Mysql, que fica logo na raiz do projeto, já os arquivos SQL que determinam como nossa tabela será montada ficam na segunda pasta db que se localiza juntamente com os arquivos que compõem nossa Rest API e através desse arquivo e do arquivo shell dentro da pasta ci do projeto nosso banco é montado, pois nosso arquivo shell le e executa os comandos sql que estão dentro do arquvio</p>
