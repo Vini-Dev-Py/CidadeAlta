@@ -93,6 +93,245 @@ https://user-images.githubusercontent.com/62727555/177458910-45634140-3897-4318-
 
 <p>A conexão entre o banco de dados e o MySQL Workbench deve ser feita dessa forma</p>
 
+## Testando nossa Rest API
+
+1. Create User - Criar usuário
+    - Nessa chamada do tipo post que precisa de 2 parametros, userName e password realizando essa chamada nossa senha é criptografada e guardada no nosso banco junto com nosso userName.
+
+    Envio:
+    ```
+    {
+        "userName": "root",
+        "password": "root"
+    }
+    ```
+
+    Retorno:
+    ```
+    {
+        "id": 1,
+        "userName": "root",
+        "password": "48-13-49-4D-13-7E-16-31-BB-A3-01-D5-AC-AB-6E-7B-B7-AA-74-CE-11-85-D4-56-56-5E-F5-1D-73-76-77-B2"
+    }
+    ```
+2. Validate User - Validar usuário
+    - Nessa chamada do tipo post que precisa de 2 parametros, userName e password realizando essa chamada nossas credenciais são verificadas e se estiverem corretas a api nos retorna nosso token de acesso.
+
+    Envio:
+    ```
+    {
+        "userName": "root",
+        "password": "root"
+    }
+    ```
+
+    Retorno:
+    ```
+    {
+        "authenticated": true,
+        "created": "2022-07-06 22:40:41",
+        "expiration": "2022-07-06 23:40:41",
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI5NzAyMWZjYTg0YzQ0M2YxOGE0YzE1ODYxYmQzMzBhMiIsInVuaXF1ZV9uYW1lIjoicm9vdCIsImlkdXNlciI6IjEiLCJleHAiOjE2NTcxNjE2NDEsImlzcyI6IkV4ZW1wbGVJc3N1ZXIiLCJhdWQiOiJFeGVtcGxlQXVkaWVuY2UifQ.EwAJOH00Os2jF6xVJAxUBZGUpmfDp_IAOC34OgUvJ24",
+        "refreshToken": "ErHfHrFnoEykL5/Hg3T/K6Wxx/q2aFe48GD3Zra0PHk="
+    }
+    ```
+3. Create CriminalCode - Criar Codigo Criminal
+    - Nessa chamada do tipo post que precisa de 4 parametros no body e o accessToken tanto no queryString quanto na Header, quando concluida é criado um novo codigo penal.
+
+    Envio:
+    ```
+    {
+        "name": "Pedro",
+        "description": "Teste",
+        "penalty": 100.00,
+        "prisonTime": 25
+    }
+    ```
+
+    Retorno:
+    ```
+    {
+        "id": 10,
+        "name": "Pedro",
+        "description": "Teste",
+        "penalty": 100.00,
+        "prisonTime": 25,
+        "statusId": 3228,
+        "createDate": "2022-07-06T22:31:11.5219215-03:00",
+        "updateDate": "0001-01-01T00:00:00",
+        "createUserId": 1,
+        "updateUserId": 0,
+        "links": [
+            {
+                "rel": "self",
+                "href": "http://localhost:44300/api/v1/CriminalCode/10",
+                "type": "application/json",
+                "action": "GET"
+            },
+            {
+                "rel": "self",
+                "href": "http://localhost:44300/api/v1/CriminalCode/10",
+                "type": "application/json",
+                "action": "POST"
+            },
+            {
+                "rel": "self",
+                "href": "http://localhost:44300/api/v1/CriminalCode/10",
+                "type": "application/json",
+                "action": "PUT"
+            },
+            {
+                "rel": "self",
+                "href": "http://localhost:44300/api/v1/CriminalCode/10",
+                "type": "int",
+                "action": "DELETE"
+            }
+        ]
+    }
+    ```
+4. CriminalCodes - Codigos Criminais
+    - Essa chamada do tipo get so precisa do accessToken no Header para estar funcionando, como é uma chamada que ira nos trazer diversos dados quando o banco estiver totalmente populado, precisa estar organizada para facilicar seu leitura, por isso ela conta com o filtro de nome e paginação de seus dados.
+
+    URL:
+    ```
+    http://localhost:44300/api/v1/CriminalCode/{parametro1}/{parametro2}/{parametro3}
+    Exemplo: http://localhost:44300/api/v1/CriminalCode/asc/3/1
+
+    - parametro 1: É o tipo de ordenação, variando entre asc ou desc
+    - parametro 2: É o total de Codigos Criminais por pagina
+    - parametro 3: É qual pagina ele ira mostrar
+    ```
+
+    Retorno:
+    ```
+    {
+        "currentPage": 1,
+        "pageSize": 3,
+        "totalResults": 10,
+        "sortFields": null,
+        "sortDirections": "asc",
+        "filters": null,
+        "list": [
+            {
+                "id": 1,
+                "name": "Gustavo",
+                "description": "Teste",
+                "penalty": 100.00,
+                "prisonTime": 25,
+                "statusId": 5139,
+                "createDate": "2022-07-06T14:48:19",
+                "updateDate": "0001-01-01T00:00:00",
+                "createUserId": 1,
+                "updateUserId": 0,
+                "links": [
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/1",
+                        "type": "application/json",
+                        "action": "GET"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/1",
+                        "type": "application/json",
+                        "action": "POST"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/1",
+                        "type": "application/json",
+                        "action": "PUT"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/1",
+                        "type": "int",
+                        "action": "DELETE"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "name": "Gustavo",
+                "description": "Teste",
+                "penalty": 100.00,
+                "prisonTime": 25,
+                "statusId": 2436,
+                "createDate": "2022-07-06T14:50:09",
+                "updateDate": "0001-01-01T00:00:00",
+                "createUserId": 1,
+                "updateUserId": 0,
+                "links": [
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/2",
+                        "type": "application/json",
+                        "action": "GET"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/2",
+                        "type": "application/json",
+                        "action": "POST"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/2",
+                        "type": "application/json",
+                        "action": "PUT"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/2",
+                        "type": "int",
+                        "action": "DELETE"
+                    }
+                ]
+            },
+            {
+                "id": 5,
+                "name": "Isabella",
+                "description": "Teste",
+                "penalty": 100.00,
+                "prisonTime": 25,
+                "statusId": 2882,
+                "createDate": "2022-07-06T22:31:00",
+                "updateDate": "0001-01-01T00:00:00",
+                "createUserId": 1,
+                "updateUserId": 0,
+                "links": [
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/5",
+                        "type": "application/json",
+                        "action": "GET"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/5",
+                        "type": "application/json",
+                        "action": "POST"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/5",
+                        "type": "application/json",
+                        "action": "PUT"
+                    },
+                    {
+                        "rel": "self",
+                        "href": "http://localhost:44300/api/v1/CriminalCode/5",
+                        "type": "int",
+                        "action": "DELETE"
+                    }
+                ]
+            }
+        ]
+    }
+    ```
+
+### Essas são as chamadas principais para o teste da aplicação
+
 ### Como essas imagens são ?
 
 - Dockerfile dotnet
