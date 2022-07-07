@@ -126,6 +126,7 @@ namespace CodigoPenalCDA
             services.AddScoped<IStatusBusiness, StatusBusinessImplementation>();
             services.AddTransient<ITokenService, TokenService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICriminalCodeRepository, CriminalCodeRepository>();
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
         }
 

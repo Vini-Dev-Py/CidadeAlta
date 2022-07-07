@@ -1,18 +1,14 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CodigoPenalCDA.Business;
 using CodigoPenalCDA.Data.VO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CodigoPenalCDA.Controllers
 {
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class StatusController : ControllerBase
     {
         private IStatusBusiness _statusBusiness;
@@ -23,13 +19,13 @@ namespace CodigoPenalCDA.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCriminalCodes() 
+        public IActionResult GetStatus() 
         {
             return Ok(_statusBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetCriminalCode(long id) 
+        public IActionResult Get(long id) 
         {
             var status = _statusBusiness.FindByID(id);
             if (status == null) return NotFound();
@@ -38,21 +34,21 @@ namespace CodigoPenalCDA.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCriminalCode([FromBody] StatusVO status)
+        public IActionResult CreateStatus([FromBody] StatusVO status)
         {
             if (status == null) return BadRequest();
             return Ok(_statusBusiness.Create(status));
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCriminalCode([FromBody] StatusVO status)
+        public IActionResult UpdateStatus([FromBody] StatusVO status)
         {
             if (status == null) return BadRequest();
             return Ok(_statusBusiness.Update(status));
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeleteCriminalCode(long id)
+        public IActionResult DeleteStatus(long id)
         {
             _statusBusiness.Delete(id);
             return NoContent();

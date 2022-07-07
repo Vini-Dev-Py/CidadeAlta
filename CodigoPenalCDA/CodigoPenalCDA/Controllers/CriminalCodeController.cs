@@ -1,12 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CodigoPenalCDA.Business;
 using CodigoPenalCDA.Data.VO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using CodigoPenalCDA.Hypermedia.Filters;
 
 namespace CodigoPenalCDA.Controllers
@@ -14,6 +9,7 @@ namespace CodigoPenalCDA.Controllers
     [ApiVersion("1")]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class CriminalCodeController : ControllerBase
     {
         private ICriminalCodeBusiness _criminalCodeBusiness;
@@ -23,11 +19,23 @@ namespace CodigoPenalCDA.Controllers
             _criminalCodeBusiness = criminalCodeBusiness;
         }
 
-        [HttpGet]
+        // [HttpGet]
+        // [TypeFilter(typeof(HyperMediaFilter))]
+        // public IActionResult GetCriminalCodes() 
+        // {
+        //     return Ok(_criminalCodeBusiness.FindAll());
+        // }
+
+        [HttpGet("{sortDirection}/{pageSize}/{page}")]
         [TypeFilter(typeof(HyperMediaFilter))]
-        public IActionResult GetCriminalCodes() 
+        public IActionResult GetCriminalCodesPage(
+            [FromQuery] string name, 
+            string sortDirection, 
+            int pageSize,
+            int page
+        ) 
         {
-            return Ok(_criminalCodeBusiness.FindAll());
+            return Ok(_criminalCodeBusiness.FindWithPagedSearch(name, sortDirection, pageSize, page));
         }
 
         [HttpGet("{id}")]
@@ -35,6 +43,16 @@ namespace CodigoPenalCDA.Controllers
         public IActionResult GetCriminalCode(long id) 
         {
             var criminalCode = _criminalCodeBusiness.FindByID(id);
+            if (criminalCode == null) return NotFound();
+
+            return Ok(criminalCode);
+        }
+
+        [HttpGet("FindName")]
+        [TypeFilter(typeof(HyperMediaFilter))]
+        public IActionResult GetCriminalCodeByName([FromQuery] string name) 
+        {
+            var criminalCode = _criminalCodeBusiness.FindByName(name);
             if (criminalCode == null) return NotFound();
 
             return Ok(criminalCode);
